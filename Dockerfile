@@ -25,5 +25,4 @@ EXPOSE $MLFLOW_SERVER_PORT
 WORKDIR $MLFLOW_HOME
 
 # Start MLflow server when the container is run
-RUN mlflow db upgrade postgresql://postgres:postgres@mlflowdb1.ctrcoixorex7.eu-north-1.rds.amazonaws.com:5432/postgres
-CMD mlflow server --host 0.0.0.0 --port $MLFLOW_SERVER_PORT --backend-store-uri postgresql://postgres:postgres@mlflowdb1.ctrcoixorex7.eu-north-1.rds.amazonaws.com:5432/postgres --default-artifact-root s3://mlflow-s32/mlflow_arts/ --config /mlflow/mlflow.config
+CMD mlflow db upgrade postgresql://postgres:postgres@mlflowdb1.ctrcoixorex7.eu-north-1.rds.amazonaws.com:5432/postgres && mlflow server --host 0.0.0.0 --port $MLFLOW_SERVER_PORT --backend-store-uri postgresql://postgres:postgres@mlflowdb1.ctrcoixorex7.eu-north-1.rds.amazonaws.com:5432/postgres --default-artifact-root s3://mlflow-s32/mlflow_arts/ --config /mlflow/mlflow.config
