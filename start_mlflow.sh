@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Attempt MLflow database upgrade
-mlflow db upgrade --database-uri postgresql://postgres:postgres@mlflowdb1.ctrcoixorex7.eu-north-1.rds.amazonaws.com:5432/postgres
+mlflow db upgrade postgresql://postgres:postgres@mlflowdb1.ctrcoixorex7.eu-north-1.rds.amazonaws.com:5432/postgres
 
 # Check the exit code of the previous command
 if [ $? -eq 0 ]; then
