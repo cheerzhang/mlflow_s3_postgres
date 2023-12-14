@@ -2,7 +2,7 @@
 FROM python:3.9.6-slim
 
 # Set environment variables
-ENV MLFLOW_HOME /opt/mlflow
+ENV MLFLOW_HOME /mlflow
 ENV MLFLOW_SERVER_PORT 5000
 ENV MLFLOW_S3_ENDPOINT_URL https://s3-eu-north-1.amazonaws.com
 ENV MLFLOW_S3_BUCKET mlflow-s32
@@ -18,6 +18,9 @@ RUN pip install mlflow==2.9.1
 RUN pip install psycopg2-binary==2.9.9
 RUN pip install boto3==1.33.9
 
+#
+COPY mlflow.config /mlflow/mlflow.config
+
 # Expose the MLflow UI port
 EXPOSE $MLFLOW_SERVER_PORT
 
@@ -25,4 +28,4 @@ EXPOSE $MLFLOW_SERVER_PORT
 WORKDIR $MLFLOW_HOME
 
 # Start MLflow server when the container is run
-CMD mlflow server --host 0.0.0.0 --port $MLFLOW_SERVER_PORT --backend-store-uri postgresql://postgres:postgres@mlflowdb1.ctrcoixorex7.eu-north-1.rds.amazonaws.com:5432/postgres --default-artifact-root s3://mlflow-s32/mlflow_arts/
+CMD mlflow server --host 0.0.0.0 --port $MLFLOW_SERVER_PORT --backend-store-uri postgresql://postgres:postgres@mlflowdb1.ctrcoixorex7.eu-north-1.rds.amazonaws.com:5432/postgres --default-artifact-root s3://mlflow-s32/mlflow_arts/ --config /mlflow/mlflow.config
