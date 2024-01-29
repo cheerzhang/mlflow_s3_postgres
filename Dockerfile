@@ -29,4 +29,6 @@ RUN chmod +x /start_mlflow.sh
 
 # Start MLflow server when the container is run
 # CMD ["/start_mlflow.sh"]
-CMD mlflow server --host 0.0.0.0 --port $MLFLOW_SERVER_PORT --default-artifact-root s3://mlflow-s32/mlflow_arts/
+# CMD mlflow server --host 0.0.0.0 --port $MLFLOW_SERVER_PORT --default-artifact-root s3://mlflow-s32/mlflow_arts/
+#
+CMD mlflow server --host 0.0.0.0 --port $MLFLOW_SERVER_PORT --default-artifact-root /mnt/
